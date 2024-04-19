@@ -2,7 +2,7 @@
 
 For this assignment, I utilized Terraform as the chosen configuration management tool. Terraform, developed by HashiCorp, is an open-source infrastructure as code (IaC) tool that uses HashiCorp Configuration Language (HCL) for its syntax.
 
-The primary configuration file, main1.tf, orchestrates the provisioning of an Amazon EC2 instance. This instance is initialized with an Amazon Linux 2 AMI and subsequently configured to install and run Nginx. The content to be served by Nginx is embedded within the user_data field, ensuring that upon instance initialization, the desired HTML content is immediately available for web access.
+The primary configuration file, main.tf, orchestrates the provisioning of an Amazon EC2 instance. This instance is initialized with an Amazon Linux 2 AMI and subsequently configured to install and run Nginx. The content to be served by Nginx is embedded within the user_data field, ensuring that upon instance initialization, the desired HTML content is immediately available for web access.
 
 To ensure security and accessibility, I've defined appropriate ingress rules in the associated security group. Specifically, ports 80 (HTTP) and 443 (HTTPS) are allowed for public access. Additionally, HTTP requests are automatically redirected to HTTPS to enforce secure communication. This redirection is achieved through the Nginx configuration specified within the user_data section, particularly in the default.conf file.
 
