@@ -1,9 +1,11 @@
 # terraform-nginx
 
-I have used Terraform as my configuration management tool for the assignment. Terraform is an open source infrastructure as a tool by hashicorp. Code written in terraform is in hcl syntax. 
-main1.tf is having the code for iniating the ec2 instance which is installing nginx to host the html code which is there in user_data. After successful initialization and installation we can access the html code in browser.
+For this assignment, I utilized Terraform as the chosen configuration management tool. Terraform, developed by HashiCorp, is an open-source infrastructure as code (IaC) tool that uses HashiCorp Configuration Language (HCL) for its syntax.
 
-I have also used appropriate ports to be get publicly exposed and any http requests are redirected to https, those code is handled in default.conf which lies inside the user_data section.
+The primary configuration file, main1.tf, orchestrates the provisioning of an Amazon EC2 instance. This instance is initialized with an Amazon Linux 2 AMI and subsequently configured to install and run Nginx. The content to be served by Nginx is embedded within the user_data field, ensuring that upon instance initialization, the desired HTML content is immediately available for web access.
+
+To ensure security and accessibility, I've defined appropriate ingress rules in the associated security group. Specifically, ports 80 (HTTP) and 443 (HTTPS) are allowed for public access. Additionally, HTTP requests are automatically redirected to HTTPS to enforce secure communication. This redirection is achieved through the Nginx configuration specified within the user_data section, particularly in the default.conf file.
+
 
 
 To Access The Web Server
