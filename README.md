@@ -4,6 +4,13 @@
 
 
 
+
+
+To Access The Web Server
+```shell
+https://44.202.19.255/
+```
+
 ### Images For References
 
 <img width="1512" alt="Screenshot 2024-04-19 at 11 15 42 PM" src="https://github.com/RohanRusta21/terraform-nginx/assets/110477025/3dad9d43-b5fc-4453-886a-9dea07d7fdda">
