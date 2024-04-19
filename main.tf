@@ -49,9 +49,8 @@ resource "aws_instance" "web" {
             #!/bin/bash
             sudo apt update -y
             sudo apt install -y nginx
-
-            # Generate a self-signed SSL certificate for testing purposes
-            sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt -subj "/C=US/ST=State/L=City/O=Organization/OU=Unit/CN=localhost"
+            sudo systemctl enable nginx
+            sudo systemctl start nginx
             
             echo '<html>
             <head>
@@ -60,7 +59,7 @@ resource "aws_instance" "web" {
             <body>
             <h1>Hello World!</h1>
             </body>
-            </html>' | sudo tee /usr/share/nginx/html/index.html
+            </html>' > /usr/share/nginx/html/index.html
             
             cat <<EOL | sudo tee /etc/nginx/sites-available/default
             server {
@@ -70,30 +69,14 @@ resource "aws_instance" "web" {
                 server_name _;
 
                 location / {
-                    return 301 https://\$host\$request_uri;
-                }
-            }
-
-            server {
-                listen 443 ssl default_server;
-                listen [::]:443 ssl default_server;
-                
-                ssl_certificate /etc/nginx/ssl/nginx.crt;
-                ssl_certificate_key /etc/nginx/ssl/nginx.key;
-                
-                root /usr/share/nginx/html;
-                index index.html;
-
-                location / {
-                    try_files $uri $uri/ =404;
+                    root   /usr/share/nginx/html;
+                    index  index.html;
                 }
             }
             EOL
             
             sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
-            
             sudo systemctl restart nginx
-            sudo systemctl enable nginx
             EOF
   
   tags = {
